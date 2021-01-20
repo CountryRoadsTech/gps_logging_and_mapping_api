@@ -35,4 +35,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
+
+  has_many :points, inverse_of: :user
+  has_many :routes, inverse_of: :user
 end

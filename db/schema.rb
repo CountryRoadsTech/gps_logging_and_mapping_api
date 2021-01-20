@@ -2,8 +2,8 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# This file is the source Rails uses to define your schema when running `rails
-# db:schema:load`. When creating a new database, `rails db:schema:load` tends to
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
 # be faster and is potentially less error prone than running all of your
 # migrations from scratch. Old migrations may fail to apply correctly if those
 # migrations use external dependencies or application code.
@@ -20,28 +20,33 @@ ActiveRecord::Schema.define(version: 2021_01_20_174849) do
     t.bigint "route_id", null: false
     t.text "name"
     t.text "comment"
-    t.decimal "latitude"
-    t.decimal "longitude"
+    t.decimal "latitude", precision: 6, null: false
+    t.decimal "longitude", precision: 6, null: false
     t.decimal "accuracy"
-    t.decimal "altitude"
+    t.decimal "altitude", null: false
     t.decimal "speed"
     t.decimal "heading"
-    t.datetime "recorded_at"
-    t.boolean "point_of_interest"
+    t.datetime "recorded_at", null: false
+    t.boolean "point_of_interest", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["route_id"], name: "index_points_on_route_id"
     t.index ["user_id"], name: "index_points_on_user_id"
+    t.check_constraint "latitude <= (90)::numeric", name: "latitude_max_check"
+    t.check_constraint "latitude >= ('-90'::integer)::numeric", name: "latitude_min_check"
+    t.check_constraint "longitude <= (180)::numeric", name: "longitude_max_check"
+    t.check_constraint "longitude >= ('-180'::integer)::numeric", name: "longitude_min_check"
   end
 
   create_table "routes", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.text "name"
+    t.text "name", null: false
     t.text "comment"
     t.decimal "total_distance"
     t.decimal "change_in_elevation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_routes_on_name"
     t.index ["user_id"], name: "index_routes_on_user_id"
   end
 

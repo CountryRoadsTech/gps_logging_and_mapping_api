@@ -4,14 +4,14 @@
 #
 #  id                :bigint           not null, primary key
 #  accuracy          :decimal(, )
-#  altitude          :decimal(, )
+#  altitude          :decimal(, )      not null
 #  comment           :text
 #  heading           :decimal(, )
-#  latitude          :decimal(, )
-#  longitude         :decimal(, )
+#  latitude          :decimal(6, )     not null
+#  longitude         :decimal(6, )     not null
 #  name              :text
-#  point_of_interest :boolean
-#  recorded_at       :datetime
+#  point_of_interest :boolean          default(FALSE), not null
+#  recorded_at       :datetime         not null
 #  speed             :decimal(, )
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null

@@ -5,7 +5,7 @@
 #  id                  :bigint           not null, primary key
 #  change_in_elevation :decimal(, )
 #  comment             :text
-#  name                :text
+#  name                :text             not null
 #  total_distance      :decimal(, )
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -13,6 +13,7 @@
 #
 # Indexes
 #
+#  index_routes_on_name     (name)
 #  index_routes_on_user_id  (user_id)
 #
 # Foreign Keys
