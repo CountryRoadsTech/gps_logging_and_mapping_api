@@ -14,7 +14,6 @@
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :inet
 #  locked_at              :datetime
-#  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
 #  sign_in_count          :integer          default(0), not null
@@ -31,9 +30,9 @@
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
 #
 class User < ApplicationRecord
-  # Include default devise modules. Others available are: :omniauthable
+  # Include default devise modules. Others available are: :rememberable, :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :recoverable, :validatable,
          :confirmable, :lockable, :timeoutable, :trackable
 
   has_many :points, inverse_of: :user
