@@ -10,10 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_20_160426) do
+ActiveRecord::Schema.define(version: 2021_01_20_174849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "points", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "route_id", null: false
+    t.text "name"
+    t.text "comment"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.decimal "accuracy"
+    t.decimal "altitude"
+    t.decimal "speed"
+    t.decimal "heading"
+    t.datetime "recorded_at"
+    t.boolean "point_of_interest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["route_id"], name: "index_points_on_route_id"
+    t.index ["user_id"], name: "index_points_on_user_id"
+  end
+
+  create_table "routes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.text "name"
+    t.text "comment"
+    t.decimal "total_distance"
+    t.decimal "change_in_elevation"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_routes_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -41,4 +71,7 @@ ActiveRecord::Schema.define(version: 2021_01_20_160426) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "points", "routes"
+  add_foreign_key "points", "users"
+  add_foreign_key "routes", "users"
 end
