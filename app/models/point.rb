@@ -33,7 +33,7 @@ class Point < ApplicationRecord
   belongs_to :route, inverse_of: :points
 
   validates :user, :altitude, :latitude, :longitude, :recorded_at, presence: true
-  validates :latitude_is_a_real_coordinate_on_earth, :longitude_is_a_real_coordinate_on_earth
+  validate :latitude_is_a_real_coordinate_on_earth, :longitude_is_a_real_coordinate_on_earth
   validates :point_of_interest, inclusion: { in: [true, false] }
 
   def latitude_is_a_real_coordinate_on_earth
