@@ -7,8 +7,8 @@
 #  altitude          :decimal(, )      not null
 #  comment           :text
 #  heading           :decimal(, )
-#  latitude          :decimal(6, )     not null
-#  longitude         :decimal(6, )     not null
+#  latitude          :decimal(7, )     not null
+#  longitude         :decimal(7, )     not null
 #  name              :text
 #  point_of_interest :boolean          default(FALSE), not null
 #  recorded_at       :datetime         not null

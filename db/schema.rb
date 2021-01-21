@@ -20,8 +20,8 @@ ActiveRecord::Schema.define(version: 2021_01_20_174849) do
     t.bigint "route_id", null: false
     t.text "name"
     t.text "comment"
-    t.decimal "latitude", precision: 6, null: false
-    t.decimal "longitude", precision: 6, null: false
+    t.decimal "latitude", precision: 7, null: false
+    t.decimal "longitude", precision: 7, null: false
     t.decimal "accuracy"
     t.decimal "altitude", null: false
     t.decimal "speed"
